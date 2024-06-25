@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularImageView">
+        <attr name="text" format="string" />
+        <attr name="imageUrl" format="string" />
+        <attr name="placeholder" format="reference" />
+        <attr name="initialsBackgroundColor" format="color" />
+        <attr name="initialsTextColor" format="color" />
+    </declare-styleable>
+</resources>

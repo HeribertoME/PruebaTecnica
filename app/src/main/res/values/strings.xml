@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PruebaTecnica</string>
+    <string name="circular_image_content_description">Imagen circular</string>
 </resources>
