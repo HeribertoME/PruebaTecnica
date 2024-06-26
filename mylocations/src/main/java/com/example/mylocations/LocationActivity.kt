@@ -48,10 +48,11 @@ class LocationActivity : AppCompatActivity() {
         requestLocationPermission()
 
         binding.buttonMap.setOnClickListener {
-            supportFragmentManager.beginTransaction()
+            Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+            /*supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, MapFragment())
                 .addToBackStack(null)
-                .commit()
+                .commit()*/
         }
 
         binding.buttonLocationList.setOnClickListener {

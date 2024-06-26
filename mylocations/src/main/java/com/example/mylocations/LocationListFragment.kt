@@ -67,9 +67,9 @@ class LocationListFragment : Fragment() {
             RecyclerView.ViewHolder(binding.root) {
 
             fun bind(location: LocationItem) {
-                binding.latitudeTextView.text = location.latitude.toString()
-                binding.longitudeTextView.text = location.longitude.toString()
-                binding.timestampTextView.text = android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss", location.timestamp)
+                binding.latitudeTextView.text = "Latidude: ${location.latitude.toString()}"
+                binding.longitudeTextView.text = "Longitude: ${location.longitude.toString()}"
+                binding.timestampTextView.text = "Fecha: ${android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss", location.timestamp)}"
             }
         }
     }
