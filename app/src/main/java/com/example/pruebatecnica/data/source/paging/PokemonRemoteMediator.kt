@@ -19,10 +19,17 @@ class PokemonRemoteMediator(
         loadType: LoadType,
         state: PagingState<Int, PokemonEntity>
     ): MediatorResult {
-        try {
-            val offset = if(state.pages.isEmpty()) 0 else {
-                state.pages[0].last().id
+        val page = when (loadType) {
+            LoadType.REFRESH -> 0
+            LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+            LoadType.APPEND -> {
+                val lastItem = state.lastItemOrNull()
+                lastItem?.id ?: return MediatorResult.Success(endOfPaginationReached = false)
             }
+        }
+
+        try {
+            val offset = page
             val response = apiService.getPokemonList(offset, state.config.pageSize)
             val pokemons = response.results.map { result ->
                 val details = apiService.getPokemonDetails(result.name)

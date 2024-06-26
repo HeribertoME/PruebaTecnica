@@ -3,7 +3,6 @@ package com.example.pruebatecnica.presentation.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.example.pruebatecnica.domain.model.Pokemon
 import com.example.pruebatecnica.domain.usecases.GetPokemonListUseCase
 import com.example.pruebatecnica.presentation.models.UiState
@@ -31,7 +30,6 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = UiState.Loading
             getPokemonListUseCase()
-                .cachedIn(viewModelScope)
                 .catch { exception ->
                     _state.value = UiState.Error(exception.message ?: "Unknown error")
                 }
