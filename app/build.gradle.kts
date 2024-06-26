@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
     implementation(libs.room.ktx)
+    implementation(libs.paging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

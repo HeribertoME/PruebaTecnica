@@ -1,26 +1,21 @@
 package com.example.pruebatecnica.data.repository
 
+import androidx.paging.PagingData
 import com.example.pruebatecnica.data.source.local.LocalDataSource
 import com.example.pruebatecnica.data.source.remote.RemoteDataSource
 import com.example.pruebatecnica.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
 ) : PokemonRepository {
-    override suspend fun getPokemonList(page: Int, limit: Int): Flow<List<Pokemon>> = flow {
-        val offset = page * limit
-        remoteDataSource.getPokemonList(offset, limit)
-            .catch { emit(localDataSource.getAllPokemons().first()) }
-            .collect { list ->
-                localDataSource.insertAll(list)
-                emit(list)
-            }
+
+    override fun getPokemonList(): Flow<PagingData<Pokemon>> {
+        return remoteDataSource.getPokemonList()
     }
 
     override suspend fun getPokemonDetails(id: Int): Flow<Pokemon> = flow {

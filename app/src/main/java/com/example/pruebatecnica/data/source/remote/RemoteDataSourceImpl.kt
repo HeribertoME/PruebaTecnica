@@ -1,22 +1,28 @@
 package com.example.pruebatecnica.data.source.remote
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.pruebatecnica.data.mappers.toDomain
 import com.example.pruebatecnica.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
     private val apiService: PokemonApiService
 ) : RemoteDataSource {
 
-    override suspend fun getPokemonList(offset: Int, limit: Int): Flow<List<Pokemon>> = flow {
-        val response = apiService.getPokemonList(offset, limit)
+    override fun getPokemonList(): Flow<PagingData<Pokemon>> {
+        return Pager(
+            config = PagingConfig(pageSize = 25),
+            pagingSourceFactory = { PokemonPagingSource(apiService) }
+        ).flow
+        /*val response = apiService.getPokemonList(offset, limit)
         val pokemons = response.results.map { result ->
             val details = apiService.getPokemonDetails(result.name)
             details.toDomain()
         }
-        emit(pokemons)
+        emit(pokemons)*/
     }
 
     override suspend fun getPokemonDetails(name: String): Pokemon {

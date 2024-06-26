@@ -1,9 +1,10 @@
 package com.example.pruebatecnica.data.source.remote
 
+import androidx.paging.PagingData
 import com.example.pruebatecnica.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
-    suspend fun getPokemonList(offset: Int, limit: Int): Flow<List<Pokemon>>
+    fun getPokemonList(): Flow<PagingData<Pokemon>>
     suspend fun getPokemonDetails(name: String): Pokemon
 }

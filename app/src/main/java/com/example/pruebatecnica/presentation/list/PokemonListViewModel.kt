@@ -2,14 +2,12 @@ package com.example.pruebatecnica.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.pruebatecnica.domain.model.Pokemon
 import com.example.pruebatecnica.domain.usecases.GetPokemonListUseCase
-import com.example.pruebatecnica.presentation.models.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,11 +16,10 @@ class PokemonListViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<UiState<List<Pokemon>>>(UiState.Loading)
-    val state: StateFlow<UiState<List<Pokemon>>> = _state.asStateFlow()
+    val flow: Flow<PagingData<Pokemon>> = getPokemonListUseCase().cachedIn(viewModelScope)
 
-    private var currentPage = 0
-    private val limit = 25 // Items per page
+    /*private val _state = MutableStateFlow<UiState<List<Pokemon>>>(UiState.Loading)
+    val state: StateFlow<UiState<List<Pokemon>>> = _state.asStateFlow()
 
     init {
         loadPokemonList()
@@ -41,7 +38,7 @@ class PokemonListViewModel @Inject constructor(
                     currentPage++
                 }
         }
-    }
+    }*/
 
     fun onItemClick(pokemon: Pokemon) {
         viewModelScope.launch {
