@@ -47,4 +47,9 @@ class PokemonRepositoryImpl @Inject constructor(
     override suspend fun updatePokemon(pokemon: Pokemon) {
         localDataSource.updatePokemon(pokemon)
     }
+
+    override suspend fun getPokemonById(pokemonId: Int): Pokemon? {
+        val entity = localDataSource.getPokemonById(pokemonId)
+        return entity?.toDomain()
+    }
 }

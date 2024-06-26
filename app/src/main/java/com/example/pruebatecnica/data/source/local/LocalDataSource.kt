@@ -10,4 +10,5 @@ interface LocalDataSource {
     suspend fun getAllPokemons(): Flow<List<Pokemon>>
     suspend fun insertAll(pokemons: List<Pokemon>)
     suspend fun updatePokemon(pokemon: Pokemon)
+    suspend fun getPokemonById(pokemonId: Int): PokemonEntity?
 }

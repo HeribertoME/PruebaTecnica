@@ -22,4 +22,7 @@ interface PokemonDao {
 
     @Update
     suspend fun update(pokemon: PokemonEntity)
+
+    @Query("SELECT * FROM pokemon WHERE id = :pokemonId LIMIT 1")
+    suspend fun getPokemonById(pokemonId: Int): PokemonEntity?
 }

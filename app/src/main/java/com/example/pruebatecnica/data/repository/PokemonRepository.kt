@@ -11,4 +11,6 @@ interface PokemonRepository {
     suspend fun getPokemonDetails(id: Int): Flow<Pokemon>
 
     suspend fun updatePokemon(pokemon: Pokemon)
+
+    suspend fun getPokemonById(pokemonId: Int): Pokemon?
 }

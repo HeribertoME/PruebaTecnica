@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/pokemonDetailFragment"
-        android:name="com.example.pruebatecnica.presentation.detail.fragments.PokemonDetailFragment"
+        android:name="com.example.pruebatecnica.presentation.detail.PokemonDetailFragment"
         android:label="DetailFragment">
         <argument
             android:name="pokemonId"

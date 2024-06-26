@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pruebatecnica.databinding.FragmentListBinding
 import com.example.pruebatecnica.presentation.adapters.LoadAdapter
@@ -38,11 +39,12 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = PokemonAdapter {
-            /*findNavController().navigate(
-                //PokemonListFragmentDirections.
-            )*/
-            Toast.makeText(requireContext(), "Next", Toast.LENGTH_SHORT).show()
+        adapter = PokemonAdapter { pokemon ->
+            findNavController().navigate(
+                PokemonListFragmentDirections.actionListFragmentToDetailFragment(
+                    pokemon.id
+                )
+            )
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

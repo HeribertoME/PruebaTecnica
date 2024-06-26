@@ -13,33 +13,11 @@ class GetPokemonListUseCase @Inject constructor(
         return repository.getPokemonList()
     }
 }
-/*
-class GetPokemonDetailUseCase(private val repository: PokemonRepository) {
-    suspend operator fun invoke(id: Int): Pokemon {
-        return repository.getPokemonDetail(id)
+
+class GetPokemonByIdUseCase @Inject constructor(
+    private val repository: PokemonRepository
+) {
+    suspend operator fun invoke(pokemonId: Int): Pokemon? {
+        return repository.getPokemonById(pokemonId)
     }
 }
-
-class InsertPokemonUseCase(private val repository: PokemonRepository) {
-    suspend operator fun invoke(pokemon: Pokemon) {
-        repository.insertPokemon(pokemon)
-    }
-}
-
-class UpdatePokemonUseCase(private val repository: PokemonRepository) {
-    suspend operator fun invoke(pokemon: Pokemon) {
-        repository.updatePokemon(pokemon)
-    }
-}
-
-class DeletePokemonUseCase(private val repository: PokemonRepository) {
-    suspend operator fun invoke(pokemon: Pokemon) {
-        repository.deletePokemon(pokemon)
-    }
-}
-
-class GetAllPokemonUseCase(private val repository: PokemonRepository) {
-    operator fun invoke(): LiveData<List<Pokemon>> {
-        return repository.getAllPokemon()
-    }
-}*/
