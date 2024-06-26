@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pruebatecnica.domain.model.Pokemon
 import com.example.pruebatecnica.domain.usecases.GetPokemonByIdUseCase
+import com.example.pruebatecnica.domain.usecases.UpdatePokemonUseCase
 import com.example.pruebatecnica.presentation.models.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(
-    private val getPokemonByIdUseCase: GetPokemonByIdUseCase
+    private val getPokemonByIdUseCase: GetPokemonByIdUseCase,
+    private val updatePokemonUseCase: UpdatePokemonUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<UiState<Pokemon>>(UiState.Loading)
     val state: StateFlow<UiState<Pokemon>> = _state
@@ -28,6 +30,14 @@ class PokemonDetailViewModel @Inject constructor(
                         _state.value = UiState.Error("Pokemon not found")
                     }
                 }
+        }
+    }
+
+    fun onFavoriteIconClick(pokemon: Pokemon) {
+        viewModelScope.launch {
+            val updatedPokemon = pokemon.copy(isFavorite = !pokemon.isFavorite)
+            updatePokemonUseCase(updatedPokemon)
+            _state.value = UiState.Success(updatedPokemon)
         }
     }
 

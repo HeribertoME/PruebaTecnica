@@ -48,7 +48,6 @@ class PokemonDetailFragment : Fragment() {
 
         val pokemonId = args.pokemonId
         viewModel.getPokemonById(pokemonId)
-
         lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 when (state) {
@@ -64,6 +63,12 @@ class PokemonDetailFragment : Fragment() {
                             pokemonHeightTextView.text = "Height: ${pokemon.height}"
                             pokemonWeightTextView.text = "Weight: ${pokemon.weight}"
                             pokemonTypesTextView.text = "Types: ${pokemon.types.joinToString(", ")}"
+                            ivFavoriteIcon.setImageResource(
+                                if (pokemon.isFavorite) R.drawable.ic_favorite_filled else R.drawable.ic_favorite
+                            )
+                            ivFavoriteIcon.setOnClickListener {
+                                viewModel.onFavoriteIconClick(pokemon)
+                            }
                         }
                     }
                     is UiState.Error -> {
