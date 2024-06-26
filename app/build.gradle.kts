@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -37,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -50,6 +52,7 @@ dependencies {
     implementation(libs.navigationFragmentKtx)
     implementation(libs.navigationUiKtx)
     implementation(libs.glide)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.glide.compiler)
     implementation(libs.lifecycleLivedataKtx)
     implementation(libs.lifecycleViewmodelKtx)
@@ -58,6 +61,9 @@ dependencies {
     implementation(libs.hiltAndroid)
     kapt(libs.hiltAndroidCompiler)
     implementation(libs.coroutines.android)
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

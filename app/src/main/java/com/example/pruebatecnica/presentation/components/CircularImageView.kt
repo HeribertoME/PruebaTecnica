@@ -1,4 +1,4 @@
-package com.example.pruebatecnica
+package com.example.pruebatecnica.presentation.components
 
 import android.content.Context
 import android.graphics.Canvas
@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.example.pruebatecnica.R
 import com.example.pruebatecnica.databinding.ViewCircularImageBinding
 import com.example.pruebatecnica.extensions.loadCircularImage
 import com.example.pruebatecnica.utils.Utils
