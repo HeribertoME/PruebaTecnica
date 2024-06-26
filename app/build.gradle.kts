@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.navigationUiKtx)
     implementation(libs.glide)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(project(":mylocations"))
     kapt(libs.glide.compiler)
     implementation(libs.lifecycleLivedataKtx)
     implementation(libs.lifecycleViewmodelKtx)
@@ -64,6 +65,11 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
+
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    kapt(libs.androidx.hilt.compiler)
+
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
     implementation(libs.paging)
