@@ -50,7 +50,6 @@ dependencies {
 
     // Google Play Services Location
     implementation(libs.play.services.location)
-    implementation(libs.huawei.location)
     implementation(libs.play.services.maps)
 
     implementation(libs.androidx.work.runtime.ktx)

@@ -3,4 +3,5 @@
     <string name="circular_image_content_description">Imagen circular</string>
     <string name="pokemon_image">Image Pokemon</string>
     <string name="favorite_icon_description">Icon favorite</string>
+    <string name="location_menu_option">Location</string>
 </resources>
