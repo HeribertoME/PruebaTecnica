@@ -46,6 +46,20 @@ class LocationActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         requestLocationPermission()
+
+        binding.buttonMap.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, MapFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.buttonLocationList.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, LocationListFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun requestLocationPermission() {
