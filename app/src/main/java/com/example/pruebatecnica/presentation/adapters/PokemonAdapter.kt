@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pruebatecnica.R
 import com.example.pruebatecnica.databinding.ItemPokemonBinding
 import com.example.pruebatecnica.domain.model.Pokemon
 
 class PokemonAdapter(
-    private val onClickItem: (Pokemon) -> Unit
+    private val onClickItem: (Pokemon) -> Unit,
+    private val onFavoriteIconClick: (Pokemon) -> Unit
 ) : PagingDataAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -29,7 +31,12 @@ class PokemonAdapter(
             binding.tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
             binding.civPokemonImage.setImageUrl(pokemon.imageUrl)
             binding.civPokemonImage.setText(pokemon.name)
-            binding.root.setOnClickListener { onClickItem(pokemon) }
+            binding.ivFavoriteIcon.setImageResource(
+                if (pokemon.isFavorite) R.drawable.ic_favorite_filled else R.drawable.ic_favorite
+            )
+
+            binding.linearLayoutItemPokemon.setOnClickListener { onClickItem(pokemon) }
+            binding.ivFavoriteIcon.setOnClickListener { onFavoriteIconClick(pokemon) }
         }
     }
 

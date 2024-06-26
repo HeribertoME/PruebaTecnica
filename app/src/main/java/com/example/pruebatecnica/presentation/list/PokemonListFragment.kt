@@ -39,12 +39,14 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = PokemonAdapter { pokemon ->
+        adapter = PokemonAdapter({ pokemon ->
             findNavController().navigate(
                 PokemonListFragmentDirections.actionListFragmentToDetailFragment(
                     pokemon.id
                 )
             )
+        }) {
+            viewModel.onFavoriteClick(it)
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

@@ -33,13 +33,15 @@ class PokemonRemoteMediator(
             val response = apiService.getPokemonList(offset, state.config.pageSize)
             val pokemons = response.results.map { result ->
                 val details = apiService.getPokemonDetails(result.name)
+                val isFavorite = pokemonDao.isFavorite(details.id)?.isFavorite ?: false
                 PokemonEntity(
                     id = details.id,
                     name = details.name,
                     imageUrl = details.sprites.front_default,
                     height = details.height,
                     weight = details.weight,
-                    types = details.types.joinToString(",") { it.type.name }
+                    types = details.types.joinToString(",") { it.type.name },
+                    isFavorite = isFavorite
                 )
             }
             pokemonDao.insertAll(pokemons)

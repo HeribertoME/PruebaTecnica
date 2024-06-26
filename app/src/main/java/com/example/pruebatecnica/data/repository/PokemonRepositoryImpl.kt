@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.pruebatecnica.data.mappers.toDomain
+import com.example.pruebatecnica.data.mappers.toEntity
 import com.example.pruebatecnica.data.source.local.LocalDataSource
 import com.example.pruebatecnica.data.source.paging.PokemonRemoteMediator
 import com.example.pruebatecnica.data.source.remote.RemoteDataSource
@@ -45,7 +46,8 @@ class PokemonRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updatePokemon(pokemon: Pokemon) {
-        localDataSource.updatePokemon(pokemon)
+        val entity = pokemon.toEntity()
+        localDataSource.updatePokemon(entity)
     }
 
     override suspend fun getPokemonById(pokemonId: Int): Pokemon? {

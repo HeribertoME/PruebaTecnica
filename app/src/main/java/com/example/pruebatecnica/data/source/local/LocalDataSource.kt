@@ -9,6 +9,6 @@ interface LocalDataSource {
     fun getPokemonsPaging(): PagingSource<Int, PokemonEntity>
     suspend fun getAllPokemons(): Flow<List<Pokemon>>
     suspend fun insertAll(pokemons: List<Pokemon>)
-    suspend fun updatePokemon(pokemon: Pokemon)
+    suspend fun updatePokemon(pokemon: PokemonEntity)
     suspend fun getPokemonById(pokemonId: Int): PokemonEntity?
 }

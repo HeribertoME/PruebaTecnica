@@ -21,3 +21,11 @@ class GetPokemonByIdUseCase @Inject constructor(
         return repository.getPokemonById(pokemonId)
     }
 }
+
+class UpdatePokemonUseCase @Inject constructor(
+    private val repository: PokemonRepository
+) {
+    suspend operator fun invoke(pokemon: Pokemon) {
+        repository.updatePokemon(pokemon)
+    }
+}

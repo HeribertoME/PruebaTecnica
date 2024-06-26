@@ -2,4 +2,5 @@
     <string name="app_name">PruebaTecnica</string>
     <string name="circular_image_content_description">Imagen circular</string>
     <string name="pokemon_image">Image Pokemon</string>
+    <string name="favorite_icon_description">Icon favorite</string>
 </resources>

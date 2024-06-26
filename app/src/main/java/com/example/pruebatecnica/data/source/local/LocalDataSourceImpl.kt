@@ -28,8 +28,8 @@ class LocalDataSourceImpl @Inject constructor(
         pokemonDao.insertAll(pokemons.map { it.toEntity() })
     }
 
-    override suspend fun updatePokemon(pokemon: Pokemon) {
-        pokemonDao.update(pokemon.toEntity())
+    override suspend fun updatePokemon(pokemon: PokemonEntity) {
+        pokemonDao.update(pokemon)
     }
 
     override suspend fun getPokemonById(pokemonId: Int): PokemonEntity? {

@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.pruebatecnica.R
 import com.example.pruebatecnica.databinding.FragmentDetailBinding
 import com.example.pruebatecnica.presentation.models.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +26,8 @@ class PokemonDetailFragment : Fragment() {
     private val args: PokemonDetailFragmentArgs by navArgs()
     private val viewModel: PokemonDetailViewModel by viewModels()
 
+    private lateinit var callback: OnBackPressedCallback
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +39,13 @@ class PokemonDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_detailFragment_to_listFragment)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
         val pokemonId = args.pokemonId
         viewModel.getPokemonById(pokemonId)
 
@@ -44,7 +56,6 @@ class PokemonDetailFragment : Fragment() {
                         // Show loading state
                     }
                     is UiState.Success -> {
-                        // Update UI with the pokemon details
                         val pokemon = state.data
                         binding.apply {
                             pokemonImageView.setImageUrl(pokemon.imageUrl)

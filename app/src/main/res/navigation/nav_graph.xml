@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/pokemonListFragment"
-    >
+    app:startDestination="@id/pokemonListFragment">
     <fragment
         android:id="@+id/pokemonListFragment"
         android:name="com.example.pruebatecnica.presentation.list.PokemonListFragment"
-        android:label="PokemonListFragment" >
+        android:label="PokemonListFragment"
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/pokemonDetailFragment" />
@@ -15,10 +16,14 @@
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.example.pruebatecnica.presentation.detail.PokemonDetailFragment"
-        android:label="DetailFragment">
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="pokemonId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detailFragment_to_listFragment"
+            app:destination="@id/pokemonListFragment" />
     </fragment>
 
 </navigation>
