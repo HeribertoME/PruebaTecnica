@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.pruebatecnica.data.source.local.db.AppDatabase
 import com.example.pruebatecnica.data.source.local.db.PokemonDao
+import com.example.pruebatecnica.data.source.paging.PokemonRemoteMediator
+import com.example.pruebatecnica.data.source.remote.PokemonApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +31,11 @@ object DatabaseModule {
     @Singleton
     fun providePokemonDao(db: AppDatabase): PokemonDao {
         return db.pokemonDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesMediator(apiService: PokemonApiService, dao: PokemonDao): PokemonRemoteMediator {
+        return PokemonRemoteMediator(apiService, dao)
     }
 }

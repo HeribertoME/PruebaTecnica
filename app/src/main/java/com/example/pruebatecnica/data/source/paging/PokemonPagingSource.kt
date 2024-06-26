@@ -1,7 +1,8 @@
-package com.example.pruebatecnica.data.source.remote
+package com.example.pruebatecnica.data.source.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.pruebatecnica.data.source.remote.PokemonApiService
 import com.example.pruebatecnica.domain.model.Pokemon
 import retrofit2.HttpException
 import java.io.IOException
@@ -13,7 +14,7 @@ class PokemonPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         val position = params.key ?: 0
         return try {
-            val response = apiService.getPokemonList(params.loadSize, position * params.loadSize)
+            val response = apiService.getPokemonList(position * params.loadSize, params.loadSize)
             val pokemons = response.results.map { result ->
                 val details = apiService.getPokemonDetails(result.name)
                 Pokemon(

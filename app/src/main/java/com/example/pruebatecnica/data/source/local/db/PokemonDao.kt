@@ -1,5 +1,6 @@
 package com.example.pruebatecnica.data.source.local.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,6 +13,9 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemon")
     fun getAll(): Flow<List<PokemonEntity>>
+
+    @Query("SELECT * FROM pokemon")
+    fun getAllPaging(): PagingSource<Int, PokemonEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(pokemon: List<PokemonEntity>)
