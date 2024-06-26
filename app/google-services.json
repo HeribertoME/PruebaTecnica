@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561817010214",
+    "project_id": "test-android-7a99d",
+    "storage_bucket": "test-android-7a99d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561817010214:android:be24d4fed73f45a507e6e7",
+        "android_client_info": {
+          "package_name": "com.example.pruebatecnica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaHKX41v9VcW4rTctnZQJsrSZ1q2DE9_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
