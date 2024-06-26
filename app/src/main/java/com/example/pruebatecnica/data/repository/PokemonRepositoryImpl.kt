@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class PokemonRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
@@ -16,7 +15,7 @@ class PokemonRepositoryImpl @Inject constructor(
 ) : PokemonRepository {
     override suspend fun getPokemonList(page: Int, limit: Int): Flow<List<Pokemon>> = flow {
         val offset = page * limit
-        remoteDataSource.getPokemonList(limit, offset)
+        remoteDataSource.getPokemonList(offset, limit)
             .catch { emit(localDataSource.getAllPokemons().first()) }
             .collect { list ->
                 localDataSource.insertAll(list)

@@ -36,24 +36,9 @@ class PokemonListViewModel @Inject constructor(
                     _state.value = UiState.Error(exception.message ?: "Unknown error")
                 }
                 .collect { pokemons ->
-                    _state.value = UiState.Success(
-                        (_state.value as? UiState.Success)?.data?.plus(pokemons) ?: pokemons
-                    )
-                    currentPage.inc()
-                }
-        }
-    }
-
-    fun refreshPokemonList() {
-        viewModelScope.launch {
-            _state.value = UiState.Loading
-            currentPage = 0
-            getPokemonListUseCase(currentPage, limit)
-                .catch { exception ->
-                    _state.value = UiState.Error(exception.message ?: "Unknown Error")
-                }
-                .collect { pokemons ->
-                    _state.value = UiState.Success(pokemons)
+                    val currentList = (_state.value as? UiState.Success)?.data ?: emptyList()
+                    _state.value = UiState.Success(currentList + pokemons)
+                    currentPage++
                 }
         }
     }

@@ -10,8 +10,8 @@ class RemoteDataSourceImpl @Inject constructor(
     private val apiService: PokemonApiService
 ) : RemoteDataSource {
 
-    override suspend fun getPokemonList(limit: Int, offset: Int): Flow<List<Pokemon>> = flow {
-        val response = apiService.getPokemonList(limit, offset)
+    override suspend fun getPokemonList(offset: Int, limit: Int): Flow<List<Pokemon>> = flow {
+        val response = apiService.getPokemonList(offset, limit)
         val pokemons = response.results.map { result ->
             val details = apiService.getPokemonDetails(result.name)
             details.toDomain()

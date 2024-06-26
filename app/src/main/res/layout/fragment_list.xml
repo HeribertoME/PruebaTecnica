@@ -24,19 +24,13 @@
                 android:title="Pokémon List" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                tools:listitem="@layout/item_pokemon" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:padding="16dp"
+            android:layout_marginTop="?actionBarSize"
+            tools:listitem="@layout/item_pokemon" />
 
         <ProgressBar
             android:id="@+id/progressBar"
