@@ -58,8 +58,13 @@ dependencies {
     ksp(libs.glide.compiler)
     implementation(libs.lifecycleLivedataKtx)
     implementation(libs.lifecycleViewmodelKtx)
+
+    // Retrofit & okhttp
     implementation(libs.retrofit)
     implementation(libs.retrofitConverterGson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+
     implementation(libs.hiltAndroid)
     ksp(libs.hiltAndroidCompiler)
     implementation(libs.coroutines.android)
@@ -78,7 +83,6 @@ dependencies {
 
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
-    implementation(libs.paging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

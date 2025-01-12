@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pruebatecnica.databinding.FragmentListBinding
-import com.example.pruebatecnica.presentation.adapters.LoadAdapter
 import com.example.pruebatecnica.presentation.adapters.PokemonAdapter
 import com.example.pruebatecnica.presentation.models.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,10 +49,8 @@ class PokemonListFragment : Fragment() {
             viewModel.onFavoriteClick(it)
         }
 
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = adapter.withLoadStateFooter(
-            footer = LoadAdapter { adapter.retry() }
-        )
 
         lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
@@ -63,7 +61,7 @@ class PokemonListFragment : Fragment() {
 
                     is UiState.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.submitData(state.data)
+                        adapter.submitList(state.data)
                     }
 
                     is UiState.Error -> {
@@ -73,6 +71,15 @@ class PokemonListFragment : Fragment() {
                 }
             }
         }
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)) {
+                    viewModel.loadPokemonList()
+                }
+            }
+        })
     }
 
     override fun onDestroy() {

@@ -2,7 +2,6 @@ package com.example.pruebatecnica.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import com.example.pruebatecnica.domain.model.Pokemon
 import com.example.pruebatecnica.domain.usecases.GetPokemonListUseCase
 import com.example.pruebatecnica.domain.usecases.UpdatePokemonUseCase
@@ -21,22 +20,26 @@ class PokemonListViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase,
     private val updatePokemonUseCase: UpdatePokemonUseCase
 ) : ViewModel() {
-    private val _state = MutableStateFlow<UiState<PagingData<Pokemon>>>(UiState.Loading)
-    val state: StateFlow<UiState<PagingData<Pokemon>>> = _state.asStateFlow()
+    private val _state = MutableStateFlow<UiState<List<Pokemon>>>(UiState.Loading)
+    val state: StateFlow<UiState<List<Pokemon>>> = _state.asStateFlow()
+
+    private var currentPage = 0
+    private val limit = 25
 
     init {
         loadPokemonList()
     }
 
-    private fun loadPokemonList() {
+    fun loadPokemonList() {
         viewModelScope.launch {
             _state.value = UiState.Loading
-            getPokemonListUseCase()
+            getPokemonListUseCase(currentPage, limit)
                 .catch { exception ->
                     _state.value = UiState.Error(exception.message ?: "Unknown error")
                 }
-                .collectLatest { pagingData ->
-                    _state.value = UiState.Success(pagingData)
+                .collect { pokes ->
+                    _state.value = UiState.Success(pokes)
+                    currentPage++
                 }
         }
     }

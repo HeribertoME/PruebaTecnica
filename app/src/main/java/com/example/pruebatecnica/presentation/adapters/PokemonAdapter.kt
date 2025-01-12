@@ -2,8 +2,8 @@ package com.example.pruebatecnica.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pruebatecnica.R
 import com.example.pruebatecnica.databinding.ItemPokemonBinding
@@ -12,7 +12,7 @@ import com.example.pruebatecnica.domain.model.Pokemon
 class PokemonAdapter(
     private val onClickItem: (Pokemon) -> Unit,
     private val onFavoriteIconClick: (Pokemon) -> Unit
-) : PagingDataAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(DiffCallback) {
+) : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)

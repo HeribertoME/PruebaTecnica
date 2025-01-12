@@ -16,12 +16,12 @@ glide = "4.16.0"
 lifecycle = "2.8.2"
 playServicesLocation = "21.3.0"
 retrofit = "2.9.0"
+okhttp = "4.12.0"
 hilt = "2.51.1"
 coroutines = "1.7.3"
 room = "2.5.2"
 ksp = "1.9.24-1.0.20"
 swiperefreshlayout = "1.1.0"
-paging = "3.3.0"
 playServicesMaps = "18.2.0"
 workRuntimeKtx = "2.9.0"
 
@@ -48,6 +48,8 @@ lifecycleViewmodelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmo
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofitConverterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 hiltAndroid = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hiltAndroidCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -56,7 +58,6 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room"}
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging"}
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
