@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.navigationUiKtx)
     implementation(libs.glide)
     implementation(libs.androidx.swiperefreshlayout)
-    implementation(project(":mylocations"))
     ksp(libs.glide.compiler)
     implementation(libs.lifecycleLivedataKtx)
     implementation(libs.lifecycleViewmodelKtx)
